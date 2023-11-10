@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:App_for_our_IA_tool/pages/book_list.dart';
+import 'package:http/http.dart';
 import '../services/search_service.dart';
 
 class SearchPage extends StatefulWidget {
@@ -12,14 +13,35 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   List<dynamic> searchResults = [];
 
-  searchDjango(value) async {
-    SearchService.searchDjangoApi(value).then((responseBody) {
-      String val = responseBody;
-      List<dynamic> data = jsonDecode(val);
-      setState(() {
-        data.forEach((value) {
-          searchResults.add(value);
-        });
+  String search = "";
+
+  // searchDjango(value) async {
+  //   await SearchService.searchDjangoApi(value).then((responseBody) {
+  //     String val = responseBody;
+
+  //     List<dynamic> data = jsonDecode(val);
+  //     print(val);
+
+  //     setState(() {
+  //       data.forEach((value) {
+  //         searchResults.add(value);
+  //         print(value);
+  //       });
+  //     });
+  //   });
+
+  void getBook(String search) async {
+    String url = '127.0.0.1:8000';
+
+    Response response =
+        await get(Uri.http(url, '/api/books/', {"search": search}));
+    String val = response.body;
+    List<dynamic> data = jsonDecode(val);
+    print("---------++++++++++++++++++$data");
+    setState(() {
+      data.forEach((value) {
+        searchResults.add(value);
+        print(searchResults);
       });
     });
   }
@@ -40,7 +62,8 @@ class _SearchPageState extends State<SearchPage> {
               child: TextField(
                 onChanged: (val) {
                   searchResults.clear();
-                  searchDjango(val);
+                  // searchDjango(val);
+                  search = val;
                 },
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.only(left: 25.0),
@@ -50,8 +73,8 @@ class _SearchPageState extends State<SearchPage> {
                   ),
                   suffixIcon: IconButton(
                     icon: Icon(Icons.search),
-                    onPressed: () {
-                      // initiate search on press
+                    onPressed: () async {
+                      getBook(search);
                     },
                   ),
                 ),

@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'search',
+     'corsheaders',
     'rest_framework',
 ]
 
@@ -49,9 +50,38 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+     'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'TAIA900DJANGO.urls'
+
+CORS_ORIGIN_ALLOW_ALL = True
+
+# CORS_ALLOW_HEADERS = [
+# 'accept',
+# 'accept-encoding',
+# 'authorization',
+# 'content-type',
+# 'dnt',
+# 'origin',
+# 'user-agent',
+# 'x-csrftoken',
+# 'x-requested-with',
+# ]
+
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:3000",  # Remplace avec l'URL de ton application Flutter
+#     "http://127.0.0.1:3000",  # Si tu utilises cette adresse localement
+#     "http://localhost:8000",  # Adresse par défaut de Flutter pour Android
+#     "http://127.0.0.1:8000",  # Adresse par défaut de Flutter pour Android
+# ]
+# CORS_ORIGIN_ALLOW_ALL = False
+# CORS_ORIGIN_WHITELIST = (
+#   'http://localhost:8000',
+# )
+
+
+
 
 TEMPLATES = [
     {
