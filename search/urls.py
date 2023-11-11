@@ -13,7 +13,7 @@ urlpatterns = [
     path('gare/', views.GareListCreateAPIView.as_view(), name='gare-list-create'),
     path('train/', views.TrainListCreateAPIView.as_view(), name='train-list-create'), 
     path('voyage/', views.VoyageListCreateAPIView.as_view(), name='voyage-list-create'),
-    path('/voyage/fonction/<str:parametre>/', views.VoyageCustomFunction.as_view(), name='voyage-custom-function'),
+    path('voyage/fonction/<str:parametre>/', views.VoyageCustomFunction.as_view(), name='voyage-custom-function'),
     
 
 ]

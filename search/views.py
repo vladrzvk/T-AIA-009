@@ -7,7 +7,7 @@ from .serializers import VilleSerializer, GareSerializer, TrainSerializer, Voyag
 from django.http import JsonResponse
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from . import ma_fonction 
+from .ma_fonction import ma_fonction
 # Create your views here.
 
 class BookSearchAPI(generics.ListCreateAPIView):
